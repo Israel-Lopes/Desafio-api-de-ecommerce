@@ -19,11 +19,14 @@ public class LoginService {
 
     public ResponseEntity loginUser(Login model) {
         try {
+            UserEntity entity = repository.findByUserEmail(model.getLoginEmail());
             String hash = PasswordHasher.hashPassword(model.getLoginPassword());
-            UserEntity entity = repository.findByUserPassword(hash);
+
             String token = TokenGenerator.generateToken(hash);
             HttpHeaders headers = new HttpHeaders();
-            if (token != null) {
+            if (token != null
+                    && entity.getUserPassword().equals(hash)
+                    && entity.getUserEmail().equals(model.getLoginEmail())) {
                 entity.setUserToken(token);
                 headers.add("X-Auth-Token", token);
                 repository.save(entity);

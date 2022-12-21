@@ -24,6 +24,7 @@ ___________________________
 ### ``Regras``
 
 [regras do desafio](documentation/regras_do_desafio.md)
+
 __________________________
 ## Configuração MySQL
 
@@ -175,5 +176,4 @@ CREATE TABLE tb_user (
   creation_date DATE,
   token VARCHAR(255)
 );
-
 ```

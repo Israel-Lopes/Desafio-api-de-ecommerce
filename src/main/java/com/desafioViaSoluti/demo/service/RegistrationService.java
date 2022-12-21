@@ -22,7 +22,7 @@ public class RegistrationService {
             UserEntity entity = repository.save(RegistrationMapper.marshall(model));
             LogFactory.userInfo(entity, "[POST] User success ", "[POST] User failure ");
             return entity != null
-                    ? ResponseEntity.ok().body(RegistrationMapper.unmarshall(entity))
+                    ? ResponseEntity.ok().header("Content-Type", "application/json").body(entity)
                     : ResponseEntity.notFound().build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
