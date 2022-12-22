@@ -33,7 +33,7 @@ public class ProductService {
                 token = token.substring(BEGIN_INDEX);
                 UserEntity userEntity = userRepository.findByUserToken(token);
                 return productEntity != null && userEntity.getUserToken().equals(token)
-                        ? ResponseEntity.ok().header(token).body(ProductMapper.unmarshall(productEntity))
+                        ? ResponseEntity.ok().header("Content-Type", "application/json").body(ProductMapper.unmarshall(productEntity))
                         : ResponseEntity.notFound().build();
             }
             return productEntity != null
@@ -54,7 +54,7 @@ public class ProductService {
                 token = token.substring(BEGIN_INDEX);
                 UserEntity userEntity = userRepository.findByUserToken(token);
                 return !entities.isEmpty() && userEntity.getUserToken().equals(token)
-                        ? ResponseEntity.ok().header(token).body(ProductMapper.unmarshall(entities))
+                        ? ResponseEntity.ok().header("Content-Type", "application/json").body(ProductMapper.unmarshall(entities))
                         : ResponseEntity.notFound().build();
             }
             return entities != null
@@ -69,7 +69,7 @@ public class ProductService {
             ProductEntity entity = productRepository.save(ProductMapper.marshall(model));
             LogFactory.productInfo(entity, "[POST] Products success ", "[POST] Products failure ");
             return entity != null
-                    ? ResponseEntity.ok().body(ProductMapper.unmarshall(entity))
+                    ? ResponseEntity.ok().header("Content-Type", "application/json").body(ProductMapper.unmarshall(entity))
                     : ResponseEntity.notFound().build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -84,7 +84,7 @@ public class ProductService {
             productRepository.save(entity);
             LogFactory.productInfo(entity, "[PATCH] Product updated ", "[PATCH] Product failure ");
             return entity != null
-                    ? ResponseEntity.ok().body(ProductMapper.unmarshall(entity))
+                    ? ResponseEntity.ok().header("Content-Type", "application/json").body(ProductMapper.unmarshall(entity))
                     : ResponseEntity.notFound().build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -96,7 +96,7 @@ public class ProductService {
             return productRepository.findById(id).map(record -> {
                 LogFactory.productInfo(entity, "[DELETE] Product deleted ", "[DELETE]Product failure ");
                 productRepository.deleteById(id);
-                return ResponseEntity.ok().body(id);
+                return ResponseEntity.ok().header("Content-Type", "application/json").body(id);
             }).orElse(ResponseEntity.notFound().build());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
