@@ -18,8 +18,7 @@ ___________________________
 
 1. [rotas de produto](documentation/routes_curl/product.md)
 2. [rotas de cadastro/login](documentation/routes_curl/cadastro_login.md)
-3. [rotas de catalogo](documentation/routes_curl/catalog.md)
-4. [rotas do carrinho](documentation/routes_curl/cart.md)
+3. [rotas do carrinho](documentation/routes_curl/cart.md)
 
 ### ``Regras``
 
@@ -40,6 +39,8 @@ Instalação
 
 <br />
 
+Senha teste123
+
 Interrompe mysql
 
 ``sudo service mysql stop
@@ -48,6 +49,11 @@ Interrompe mysql
 Incia o mysql
 
 ``sudo service mysql start``
+
+Conecta usuario no banco
+
+``mysql -u <username> -p
+``
 
 Connect to the database as root
 
@@ -86,57 +92,16 @@ Ver o status
 ``FLUSH PRIVILEGES;
 ``
 
+4. Altera senah do usuario, caso tenha esquecido
+
+``
+SET PASSWORD FOR 'username'@'localhost' = PASSWORD('nova_senha');
+``
+
 ## Estrutura do Projeto
 
 ```
-└── desafioViaSoluti
-    └── demo
-        ├── DesafioViaSolutiApplication.java
-        ├── percistence
-        │   └── entity
-        │       ├── CartEntity.java
-        │       ├── CatalogEntity.java
-        │       ├── ProductEntity.java
-        │       └── UserEntity.java
-        ├── repository
-        │   ├── CartRepository.java
-        │   ├── CatalogRepository.java
-        │   ├── ProductRepository.java
-        │   └── UserRepository.java
-        ├── service
-        │   ├── CartService.java
-        │   ├── CatalogService.java
-        │   ├── common
-        │   │   └── PasswordHasher.java
-        │   ├── logfatory
-        │   │   └── LogFactory.java
-        │   ├── LoginService.java
-        │   ├── model
-        │   │   ├── Cart.java
-        │   │   ├── Catalog.java
-        │   │   ├── Login.java
-        │   │   ├── Product.java
-        │   │   ├── Registration.java
-        │   │   └── User.java
-        │   ├── ProductService.java
-        │   ├── RegistrationService.java
-        │   └── token
-        │       ├── TokenGenerator.java
-        │       └── TokenVerifier.java
-        └── web
-            ├── controller
-            │   ├── CartController.java
-            │   ├── CatalogController.java
-            │   ├── LoginController.java
-            │   ├── ProductController.java
-            │   └── RegistrationController.java
-            └── mapper
-                ├── CartMapper.java
-                ├── CatalogMapper.java
-                ├── LoginMapper.java
-                ├── ProductMapper.java
-                ├── RegistrationMapper.java
-                └── UserMapper.java
+
 ```
 
 ### Query 
@@ -151,13 +116,6 @@ CREATE TABLE tb_cart (
   product_id INT,
   creation_date DATE,
   FOREIGN KEY (user_id) REFERENCES tb_user(id),
-  FOREIGN KEY (product_id) REFERENCES tb_product(id)
-);
-
-CREATE TABLE tb_catalog (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(255),
-  product_id INT,
   FOREIGN KEY (product_id) REFERENCES tb_product(id)
 );
 
