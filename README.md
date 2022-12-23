@@ -101,7 +101,52 @@ SET PASSWORD FOR 'username'@'localhost' = PASSWORD('nova_senha');
 ## Estrutura do Projeto
 
 ```
+.
+└── demo
+    ├── DesafioViaSolutiApplication.java
+    ├── percistence
+    │   └── entity
+    │       ├── CartEntity.java
+    │       ├── ProductEntity.java
+    │       └── UserEntity.java
+    ├── repository
+    │   ├── CartRepository.java
+    │   ├── ProductRepository.java
+    │   └── UserRepository.java
+    ├── service
+    │   ├── CartService.java
+    │   ├── common
+    │   │   └── PasswordHasher.java
+    │   ├── cors
+    │   │   └── CorsConfig.java
+    │   ├── logfatory
+    │   │   └── LogFactory.java
+    │   ├── LoginService.java
+    │   ├── model
+    │   │   ├── Cart.java
+    │   │   ├── Login.java
+    │   │   ├── Product.java
+    │   │   ├── Registration.java
+    │   │   └── User.java
+    │   ├── ProductService.java
+    │   ├── RegistrationService.java
+    │   └── token
+    │       ├── TokenGenerator.java
+    │       └── TokenVerifier.java
+    └── web
+        ├── controller
+        │   ├── CartController.java
+        │   ├── LoginController.java
+        │   ├── ProductController.java
+        │   └── RegistrationController.java
+        └── mapper
+            ├── CartMapper.java
+            ├── LoginMapper.java
+            ├── ProductMapper.java
+            ├── RegistrationMapper.java
+            └── UserMapper.java
 
+13 directories, 30 files
 ```
 
 ### Query 
