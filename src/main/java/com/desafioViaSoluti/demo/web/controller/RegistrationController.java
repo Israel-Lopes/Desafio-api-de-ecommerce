@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class RegistrationController {
     @Autowired(required=true)
-    RegistrationService service;
+    private RegistrationService service;
 
     @PostMapping
     @ResponseStatus(HttpStatus.ACCEPTED)

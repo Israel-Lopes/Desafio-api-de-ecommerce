@@ -13,12 +13,17 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class CartController {
     @Autowired(required=true)
-    CartService service;
+    private CartService service;
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity getCart(HttpServletRequest request, @PathVariable Long id) throws Exception {
         return service.getCart(request, id);
+    }
+    @GetMapping("/token")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public ResponseEntity getCartByToken(HttpServletRequest request) throws Exception {
+        return service.getCartByToken(request);
     }
     @PostMapping
     @ResponseStatus(HttpStatus.ACCEPTED)

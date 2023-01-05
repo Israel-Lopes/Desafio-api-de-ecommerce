@@ -15,7 +15,7 @@ import java.util.List;
 public class ProductController {
 
     @Autowired(required=true)
-    ProductService service;
+    private ProductService service;
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)

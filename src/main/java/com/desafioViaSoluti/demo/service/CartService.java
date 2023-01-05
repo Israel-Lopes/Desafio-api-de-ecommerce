@@ -42,6 +42,24 @@ public class CartService {
         }
 
     }
+    public ResponseEntity getCartByToken(HttpServletRequest request) {
+        try {
+            String token = request.getHeader("Authorization");
+            CartEntity entity = cartRepository.findByUser_UserToken(token);
+            LogFactory.cartnfo(entity, "[GET] Cart success ", "[GET] Cart failure ");
+            if (TokenVerifier.tokenValidation(request)) {
+                token = token.substring(BEGIN_INDEX);
+                UserEntity userEntity = userRepository.findByUserToken(token);
+                return entity != null && userEntity.getUserToken().equals(token)
+                        ? ResponseEntity.ok().header(token).body(CartMapper.unmarshall(entity))
+                        : ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
+    }
     public ResponseEntity createCart(HttpServletRequest request, Cart model) {
         try {
             String token = request.getHeader("Authorization");

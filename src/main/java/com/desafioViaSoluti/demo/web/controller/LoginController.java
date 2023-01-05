@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class LoginController {
     public static final Logger log = LoggerFactory.getLogger(ProductService.class);
     @Autowired(required=true)
-    LoginService service;
+    private LoginService service;
     @PostMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity login(@RequestBody Login model) throws Exception {

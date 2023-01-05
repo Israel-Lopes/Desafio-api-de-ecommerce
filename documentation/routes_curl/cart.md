@@ -7,14 +7,19 @@
 curl -X GET -H "Authorization: Bearer meu-token" 'http://localhost:8080/cart/{id}'
 ```
 
+### [GET] Busca carrinho pelo token de usuario
+```agsl
+curl -X GET -H "Authorization: Bearer meu-token" 'http://localhost:8080/cart/token'
+```
+
 ### [POST] Cria um carrinho: O usuario ja e adicionado internamente com a checagem do token
 ```agsl
 curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <MEU_TOKEN_AQUI>" -d '{
   "products": [
     {
       "productId": 1,
-      "productName": "Blusa preta",
-      "productPrice": 9999,
+      "productName": "Product name",
+      "productPrice": 99.99,
       "productDescription": "Product description"
     }
   ]
