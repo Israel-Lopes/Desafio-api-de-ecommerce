@@ -1,5 +1,7 @@
 # Desafio api de ecommerce
 
+API de ecommerce feito em arquitetura REST
+
 ----------------------------
 ### Configuração do projeto
 
